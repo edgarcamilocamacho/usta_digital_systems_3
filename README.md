@@ -4,4 +4,4 @@
 
 Contenidos del repositorio:
 
-1. [Introducción a Linux]([a relative link](00_intro_linux.md)
+1. [Introducción a Linux](00_intro_linux.md)
