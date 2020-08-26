@@ -1,4 +1,4 @@
-PROJECT = hello_world
+PROJECT = classes
 
 $(PROJECT): $(PROJECT).cpp
 	g++ -o $(PROJECT) $(PROJECT).cpp
