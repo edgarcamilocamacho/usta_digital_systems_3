@@ -6,3 +6,4 @@ run: function_pointers
 
 clean:
 	rm -rf function_pointers
+	
