@@ -26,13 +26,21 @@ int main()
 		  msec = difference * 1000 / CLOCKS_PER_SEC;
 		} while ( msec < trigger );
 		printf("Child finished \n");
-
+		exit(0);
 	}
 	else if(pid_child > 0){
-		//parent
+		// PROCESAMIENTO DEL PADRE //
+		printf("Padre esperando una tecla\n");
 		getchar();
+		// FIN DEL PROCESAMIENTO DEL PADRE //
+
+		printf("Padre esperando a que el hijo termine\n");
+		wait(NULL);
+
+		exit(0);
 	}
-	else
+	else{
 		fprintf(stderr, "Fork failed \n");
 		return 1;
+	}
 }

@@ -34,13 +34,19 @@ int main()
 		// parent
 		wpid = wait(&status);
 		if(wpid == pid_child){
-			if(status==EXIT_SUCCESS)
+			if(status==EXIT_SUCCESS){
 				printf("[P] Child exited normally\n");
-			else
+				// exit(EXIT_SUCCESS);
+				return EXIT_SUCCESS;
+			}
+			else{
 				printf("[P] Child process aborted\n");
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
-	else
+	else{
 		fprintf(stderr, "Fork failed \n");
 		return 1;
+	}
 }
