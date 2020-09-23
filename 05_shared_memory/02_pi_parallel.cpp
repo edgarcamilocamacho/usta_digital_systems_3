@@ -37,8 +37,7 @@ int main(int argc, char** argv)
 
     if(n>32) n=32;
 
-    smem = mmap(NULL, n*sizeof(float), PROT_READ | PROT_WRITE,
-                    MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    smem = mmap(NULL, n*sizeof(float), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
 
     printf("[n] Creando %d hijos.\n\n", n);
     pidChildren = new pid_t[n];
@@ -64,7 +63,7 @@ int main(int argc, char** argv)
             printf("[P] Finalizado el hijo %d\n", wid);
         }
         for(i=0; i<n; i++){
-            totalPi += *(((double*)smem)+i);
+            totalPi += ((double*)smem)[i];
         }
         totalPi *= 4.0;
         printf("[P] Pi = %.30f\n", totalPi);
