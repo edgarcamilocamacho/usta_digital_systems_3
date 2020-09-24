@@ -6,22 +6,7 @@
 #include <fcntl.h> //defines the shm_open, mmap
 #include <time.h>
 
-#define BUFFER_SIZE 10
-
-typedef unsigned char uchar;
-
-const char *shmem_name = "SHMEM_DIGITAL3_04"; // Name of the shared memory section
-
-typedef struct{
-	int number;
-    char char_n;
-    // Más elementos
-}item;
-
-int shm_fd; // Descriptor of shared memory
-void *ptr; // Pointer to shared memory
-item *queue;
-int *in, *out;
+#include "04_shmem.h"
 
 int main(int argc, char** argv){
 	srand (time(NULL));
@@ -29,6 +14,7 @@ int main(int argc, char** argv){
 	shm_fd = shm_open(shmem_name, O_CREAT | O_RDWR, 0666);
 	if(shm_fd==-1){
 		printf("Memory shared could not be created.\n");
+		exit(1);
 	}
 	ftruncate(shm_fd, BUFFER_SIZE*sizeof(item) + 2*sizeof(int) );
 	ptr = mmap(0, BUFFER_SIZE*sizeof(item) + 2*sizeof(int) , PROT_WRITE, MAP_SHARED, shm_fd, 0);
@@ -40,7 +26,7 @@ int main(int argc, char** argv){
 	*out = 0;
 
 	while(1){
-		int x, char c;
+		int x; char c;
 		printf("Press Enter to send random number.");
 		getchar();
 		x = rand();
@@ -55,4 +41,5 @@ int main(int argc, char** argv){
 		printf("Value sent!\n");
 		*in = (*in+1)%BUFFER_SIZE;
 	}
+
 }	
