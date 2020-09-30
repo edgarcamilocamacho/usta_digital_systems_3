@@ -38,8 +38,7 @@ int main(){
 		write(fd[WRITE_END], write_msg, strlen(write_msg)+1);
 		//cerrar el end de escritura
 		close(fd[WRITE_END]);
-	}
-	else{
+	}else{
         char read_msg[BUFFER_SIZE];
 		//espacio del proceso hijo
 		close(fd[WRITE_END]); //cerrar en end no usado del pipe (buena práctica)
