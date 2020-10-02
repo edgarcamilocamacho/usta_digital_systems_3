@@ -2,6 +2,7 @@
 #include <sstream>
 #include <pthread.h>
 #include <cmath>
+#include <stdio.h>
 
 using namespace std;
 
@@ -25,6 +26,8 @@ int main(int argc, char *argv[]){
 	sum_vector = new double[numThreads];
 
     if(numThreads>32) numThreads=32;
+
+	// std::cout << "numThreads:" << numThreads << std::endl;
 
 	pthread_t threads[numThreads];
 	pthread_attr_t attr[numThreads];
@@ -51,6 +54,7 @@ void *runner(void *data){
 	lw = ((arg_thread*)data)->lw;
 	up = ((arg_thread*)data)->up;
 	id = ((arg_thread*)data)->id;
+	printf("id:%d, lw:%d, up:%d\n", id, lw, up);
 	for(int i=lw; i<=up; i++){
 		sum_vector[id] += sin((double)i);
 	}
